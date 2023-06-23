@@ -2,13 +2,13 @@
 
 ## Conventions
 
-- [1.1] **Extensions**: Do not use d.ts file extension even when a file contains only type declarations.
+- [1.1](#convensions-extensions) **Extensions**: Do not use d.ts file extension even when a file contains only type declarations.
 
   > Why? Type errors in `d.ts` files are not checked by TypeScript [^1].
 
 [^1]: This is because `skipLibCheck` TypeScript configuration is set to `true` in this project.
 
-- [1.2] **Type Aliases vs. Interfaces**: Do not use `interface`. Use `type`.
+- [1.2](#convensions-type-alias-vs-interface) **Type Alias vs. Interface**: Do not use `interface`. Use `type`.
 
   > Why? In TypeScript, `type` and `interface` can be used interchangeably to declare types. Use `type` for consistency.
 
@@ -24,7 +24,7 @@ type Person = {
 };
 ```
 
-- [1.3] Do not use `enum`. Use union types.
+- [1.3](#convensions-enum-vs-union-type) **Enum vs. Union Type** Do not use `enum`. Use union types.
 
   > Why? Enums come with several [pitfalls](https://blog.logrocket.com/why-typescript-enums-suck/). Most enum use cases can be replaced with union types.
 
