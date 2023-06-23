@@ -28,9 +28,8 @@
 
   > Why? Enums come with several [pitfalls](https://blog.logrocket.com/why-typescript-enums-suck/). Most enum use cases can be replaced with union types.
 
-  Most simple form of union type.
-
   ```ts
+  // Most simple form of union type.
   type Color = "red" | "green" | "blue";
   function printColors(color: Color) {
     console.log(color);
