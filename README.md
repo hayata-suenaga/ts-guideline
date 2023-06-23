@@ -57,7 +57,9 @@
   printColor(COLORS.Red);
   ```
 
-## `unknown` vs. `any`
+- [1.4](#convensions-unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand
+
+  > Why? `any` type bypasses type checking.
 
 ## `T[]` vs. `Array<T>`
 
