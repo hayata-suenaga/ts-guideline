@@ -24,9 +24,38 @@
   };
   ```
 
-- [1.3](#convensions-enum-vs-union-type) **Enum vs. Union Type** Do not use `enum`. Use union types.
+- [1.3](#convensions-enum-vs-union-type) **Enum vs. Union Type**: Do not use `enum`. Use union types.
 
   > Why? Enums come with several [pitfalls](https://blog.logrocket.com/why-typescript-enums-suck/). Most enum use cases can be replaced with union types.
+
+  Most simple form of union type.
+
+  ```ts
+  type Color = "red" | "green" | "blue";
+  function printColors(color: Color) {
+    console.log(color);
+  }
+
+  // When the values need to be iterated upon.
+  import { TupleToUnion } from "type-fest";
+  const COLORS = ["red", "green", "blue"] as const;
+  type Color = TupleToUnion<typeof COLORS>; // type: 'red' | 'green' | 'blue'
+
+  for (const colors of color) {
+    printColor(color);
+  }
+
+  // When you prefer to use object keys to access values over directly using literal values. (i.e. `COLORS.Red` vs. `"red"`)
+  import { ValueOf } from "type-fest";
+  const COLORS = {
+    Red: "red",
+    Green: "green",
+    Blue: "blue",
+  } as const;
+  type Color = ValueOf<typeof COLORS>; // type: 'red' | 'green' | 'blue'
+
+  printColor(COLORS.Red);
+  ```
 
 ## `unknown` vs. `any`
 
