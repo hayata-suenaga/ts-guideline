@@ -1,14 +1,26 @@
 ## Extensions
 
-Do not use d.ts file extension even when a file contains only type declarations. Type errors in `d.ts` files are not checked by TypeScript. [^1]
+Do not use d.ts file extension even when a file contains only type declarations. Type errors in `d.ts` files are not checked by TypeScript [^1].
 
 [^1]: This is because `skipLibCheck` TypeScript configuration is set to `true` in this project.
 
-## Type Aliases vs. Interfaces
+### Type Aliases vs. Interfaces
 
 Do not use `interface`. In TypeScript, `type` and `interface` can be used interchangeably to declare types. Use `type` for consistency.
 
-## Union Types vs. Enums
+```ts
+// bad
+interface Person {
+  name: string;
+}
+
+// good
+type Person = {
+  name: string;
+};
+```
+
+### Union Types vs. Enums
 
 Do not use `enum`. When definitnin
 
