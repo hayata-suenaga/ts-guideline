@@ -45,7 +45,8 @@
     printColor(color);
   }
 
-  // When you prefer to use object keys to access values over directly using literal values. (i.e. `COLORS.Red` vs. `"red"`)
+  // When you prefer to use object keys to access values over directly using literal values.
+  // i.e. `COLORS.Red` vs. `"red"`
   import { ValueOf } from "type-fest";
   const COLORS = {
     Red: "red",
