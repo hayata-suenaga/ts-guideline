@@ -2,7 +2,7 @@
 
 ## Conventions
 
-- [1.1](#convensions-extensions) **Extensions**: Do not use d.ts file extension even when a file contains only type declarations.
+- [1.1](#convensions-d-ts-extension) **`d.ts` Extension**: Do not use `d.ts` file extension even when a file contains only type declarations.
 
   > Why? Type errors in `d.ts` files are not checked by TypeScript [^1].
 
@@ -12,17 +12,17 @@
 
   > Why? In TypeScript, `type` and `interface` can be used interchangeably to declare types. Use `type` for consistency.
 
-```ts
-// bad
-interface Person {
-  name: string;
-}
+  ```ts
+  // bad
+  interface Person {
+    name: string;
+  }
 
-// good
-type Person = {
-  name: string;
-};
-```
+  // good
+  type Person = {
+    name: string;
+  };
+  ```
 
 - [1.3](#convensions-enum-vs-union-type) **Enum vs. Union Type** Do not use `enum`. Use union types.
 
