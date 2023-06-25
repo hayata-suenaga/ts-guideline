@@ -132,10 +132,6 @@
   }
   ```
 
-````
-
-Return types
-
 - [1.9](#conventions-jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`
 
   ```ts
@@ -153,6 +149,8 @@ Return types
    * @param age
    * @returns Whether the person is a legal drinking age or nots
    */
+  ```
+
 ````
 
 - [1.10](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them.
@@ -189,3 +187,4 @@ Return types
     optionalProp,
   }: Props) {...}
   ```
+````
