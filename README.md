@@ -79,111 +79,113 @@
 
 - [1.5](#convensions-array) **`T[]` vs. `Array<T>`**: Use T[] or readonly T[] for simple types (i.e. types which are just primitive names or type references). Use Array<T> or ReadonlyArray<T> for all other types (union types, intersection types, object types, function types, etc).
 
-```ts
-// Array<T>
-const a: Array<string | number> = ["a", "b"];
-const b: Array<{ prop: string }> = [{ prop: "a" }];
-const c: Array<() => void> = [() => {}];
+  ```ts
+  // Array<T>
+  const a: Array<string | number> = ["a", "b"];
+  const b: Array<{ prop: string }> = [{ prop: "a" }];
+  const c: Array<() => void> = [() => {}];
 
-// T[]
-const d: MyType[] = ["a", "b"];
-const e: string[] = ["a", "b"];
-const f: readonly string[] = ["a", "b"];
-```
+  // T[]
+  const d: MyType[] = ["a", "b"];
+  const e: string[] = ["a", "b"];
+  const f: readonly string[] = ["a", "b"];
+  ```
 
 - [1.6](#convension-ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` while the migration for errors that should be handled later.
 
 - [1.7](#convension-ts-nullish-coalescing) **Optional chaining and nullish coalescing**: Use optional chaining and nullish coalescing instead of the `get` lodash function.
 
-```ts
-// Bad
-import { get } from "lodash";
-const name = lodashGet(user, "name", "default name");
+  ```ts
+  // Bad
+  import { get } from "lodash";
+  const name = lodashGet(user, "name", "default name");
 
-// Good
-const name = user?.name ?? "default name";
-```
+  // Good
+  const name = user?.name ?? "default name";
+  ```
 
 - [1.8](#convension-type-inference) **Type Inference**: When possible, allow the compiler to infer type of variables.
 
-```ts
-// Bad
-const foo: string = "foo";
-const [counter, setCounter] = useState<number>(0);
+  ```ts
+  // Bad
+  const foo: string = "foo";
+  const [counter, setCounter] = useState<number>(0);
 
-// Good
-const foo = "foo";
-const [counter, setCounter] = useState(0);
-const [username, setUsername] = useState<string | undefined>(undefined); // Username is a union type of string and undefined, and its type cannot be interred from the default value of undefined
-```
+  // Good
+  const foo = "foo";
+  const [counter, setCounter] = useState(0);
+  const [username, setUsername] = useState<string | undefined>(undefined); // Username is a union type of string and undefined, and its type cannot be interred from the default value of undefined
+  ```
 
-For function return types, default to always typing them unless a function is simple enough to reason about its return type.
+  For function return types, default to always typing them unless a function is simple enough to reason about its return type.
 
-> Why? Explicit return type helps catch errors when implementation of the function changes. It also makes it easy to read code even when TypeScript intellisense is not provided.
+  > Why? Explicit return type helps catch errors when implementation of the function changes. It also makes it easy to read code even when TypeScript intellisense is not provided.
 
-```ts
-function simpleFunction(name: string) {
-  return `hello, ${name}`;
-}
+  ```ts
+  function simpleFunction(name: string) {
+    return `hello, ${name}`;
+  }
 
-function complicatedFunction(name: string): boolean {
-  // ... some complex logic here ...
-  return foo;
-}
-```
+  function complicatedFunction(name: string): boolean {
+    // ... some complex logic here ...
+    return foo;
+  }
+  ```
+
+````
 
 Return types
 
-- [1.9] **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`
+- [1.9](#conventions-jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`
 
-```ts
-// bad
-/**
- * @param {number} age
- * @returns {boolean} Whether the person is a legal drinking age or nots
- */
-function canDrink(age: number): boolean {
-  return age >= 21;
-}
+  ```ts
+  // bad
+  /**
+   * @param {number} age
+   * @returns {boolean} Whether the person is a legal drinking age or nots
+   */
+  function canDrink(age: number): boolean {
+    return age >= 21;
+  }
 
-// good
-/**
- * @param age
- * @returns Whether the person is a legal drinking age or nots
- */
-```
+  // good
+  /**
+   * @param age
+   * @returns Whether the person is a legal drinking age or nots
+   */
+````
 
-- [1.10] **`propTypes` and `defaultProps`**: Do not use them.
+- [1.10](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them.
 
-```ts
-// Before
-const propTypes = {
-  requiredProp: PropTypes.string.isRequired,
-  optionalPropWithDefaultValue: PropTypes.number,
-  optionalProp: PropTypes.bool,
-};
+  ```ts
+  // Before
+  const propTypes = {
+    requiredProp: PropTypes.string.isRequired,
+    optionalPropWithDefaultValue: PropTypes.number,
+    optionalProp: PropTypes.bool,
+  };
 
-const defaultProps = {
-  optionalPropWithDefaultValue: 42,
-};
+  const defaultProps = {
+    optionalPropWithDefaultValue: 42,
+  };
 
-function Foo(props) {...}
+  function Foo(props) {...}
 
-Foo.propTypes = propTypes;
-Foo.defaultProps = defaultProps;
+  Foo.propTypes = propTypes;
+  Foo.defaultProps = defaultProps;
 
-export default Foo;
+  export default Foo;
 
-// After
-type Props = {
-  requiredProp: string;
-  optionalPropWithDefaultValue?: number;
-  optionalProp?: boolean;
-};
+  // After
+  type Props = {
+    requiredProp: string;
+    optionalPropWithDefaultValue?: number;
+    optionalProp?: boolean;
+  };
 
-function Foo({
-  requiredProp,
-  optionalPropWithDefaultValue = 42,
-  optionalProp,
-}: Props) {...}
-```
+  function Foo({
+    requiredProp,
+    optionalPropWithDefaultValue = 42,
+    optionalProp,
+  }: Props) {...}
+  ```
