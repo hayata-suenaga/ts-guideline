@@ -2,6 +2,22 @@
 
 ## Conventions
 
+- [1.1](#convension-naming-convension) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`
+
+- Use PascalCase for type names
+
+  ```ts
+  // bad
+  type foo = ...;
+  type BAR = ...;
+  type PersonType = { name: string }
+
+  // good
+  type Foo = ...;
+  type Bar = ...;
+  type Person = { name: string };
+  ```
+
 - [1.1](#convensions-d-ts-extension) **`d.ts` Extension**: Do not use `d.ts` file extension even when a file contains only type declarations.
 
   > Why? Type errors in `d.ts` files are not checked by TypeScript [^1].
@@ -61,42 +77,113 @@
 
   > Why? `any` type bypasses type checking.
 
-## `T[]` vs. `Array<T>`
+- [1.5](#convensions-array) **`T[]` vs. `Array<T>`**: Use T[] or readonly T[] for simple types (i.e. types which are just primitive names or type references). Use Array<T> or ReadonlyArray<T> for all other types (union types, intersection types, object types, function types, etc).
 
-## `@ts-expect-error`
+```ts
+// Array<T>
+const a: Array<string | number> = ["a", "b"];
+const b: Array<{ prop: string }> = [{ prop: "a" }];
+const c: Array<() => void> = [() => {}];
 
-## Optional chaining and nullish coalescing
+// T[]
+const d: MyType[] = ["a", "b"];
+const e: string[] = ["a", "b"];
+const f: readonly string[] = ["a", "b"];
+```
 
-## Type Inference
+- [1.6](#convension-ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` while the migration for errors that should be handled later.
 
-### Return types
+- [1.7](#convension-ts-nullish-coalescing) **Optional chaining and nullish coalescing**: Use optional chaining and nullish coalescing instead of the `get` lodash function.
 
-## JSDoc
+```ts
+// Bad
+import { get } from "lodash";
+const name = lodashGet(user, "name", "default name");
 
-Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`
+// Good
+const name = user?.name ?? "default name";
+```
 
-## Default Props
+- [1.8](#convension-type-inference) **Type Inference**: When possible, allow the compiler to infer type of variables.
 
-## Naming Conventions
+```ts
+// Bad
+const foo: string = "foo";
+const [counter, setCounter] = useState<number>(0);
 
-- Use PascalCase for type names
+// Good
+const foo = "foo";
+const [counter, setCounter] = useState(0);
+const [username, setUsername] = useState<string | undefined>(undefined); // Username is a union type of string and undefined, and its type cannot be interred from the default value of undefined
+```
 
-  ```ts
-  // bad
-  type foo = ...;
-  type BAR = ...;
+For function return types, default to always typing them unless a function is simple enough to reason about its return type.
 
-  // good
-  type Foo = ...;
-  type Bar = ...;
-  ```
+> Why? Explicit return type helps catch errors when implementation of the function changes. It also makes it easy to read code even when TypeScript intellisense is not provided.
 
-- Do not postfix type aliases with Type
+```ts
+function simpleFunction(name: string) {
+  return `hello, ${name}`;
+}
 
-  ```ts
-  // bad
-  type PersonType = { name: string };
+function complicatedFunction(name: string): boolean {
+  // ... some complex logic here ...
+  return foo;
+}
+```
 
-  // good
-  type Person = { name: string };
-  ```
+Return types
+
+- [1.9] **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`
+
+```ts
+// bad
+/**
+ * @param {number} age
+ * @returns {boolean} Whether the person is a legal drinking age or nots
+ */
+function canDrink(age: number): boolean {
+  return age >= 21;
+}
+
+// good
+/**
+ * @param age
+ * @returns Whether the person is a legal drinking age or nots
+ */
+```
+
+- [1.10] **`propTypes` and `defaultProps`**: Do not use them.
+
+```ts
+// Before
+const propTypes = {
+  requiredProp: PropTypes.string.isRequired,
+  optionalPropWithDefaultValue: PropTypes.number,
+  optionalProp: PropTypes.bool,
+};
+
+const defaultProps = {
+  optionalPropWithDefaultValue: 42,
+};
+
+function Foo(props) {...}
+
+Foo.propTypes = propTypes;
+Foo.defaultProps = defaultProps;
+
+export default Foo;
+
+// After
+type Props = {
+  requiredProp: string;
+  optionalPropWithDefaultValue?: number;
+  optionalProp?: boolean;
+};
+
+function Foo({
+  requiredProp,
+  optionalPropWithDefaultValue = 42,
+  optionalProp,
+}: Props) {...}
+```
