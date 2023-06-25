@@ -151,8 +151,6 @@
    */
   ```
 
-````
-
 - [1.10](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them.
 
   ```ts
@@ -187,4 +185,7 @@
     optionalProp,
   }: Props) {...}
   ```
-````
+
+```
+
+```
