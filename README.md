@@ -34,6 +34,16 @@
 - [1.9 Type Inference](#convension-type-inference)
 - [1.10 JSDoc](#conventions-jsdoc)
 - [1.11 `propTypes` and `defaultProps`](#convension-proptypes-and-defaultprops)
+- [1.12 Utility Types](#convension-utility-types)
+
+- [Communication Items](#communication-items)
+- [Migration Guidelines](#migration-guidelines)
+
+## Exception to Rules
+
+Most of the rules are enforced in ESLint or checked by TypeScript. If you think your particular situation warrants an exception, post the context in the `#expensify-open-source` Slack channel with your message prefixed with `TS EXCEPTION:`. Internal engineers will assess the case and suggest alternative or grants an exception. When an exception is granted, link the relevant Slack conversation in your pull request. Suppress ESLint or TypeScript warnings/errors with comments if necessary.
+
+This rule will apply until the migration is done. After the migration, exceptions are assessed and granted by PR reviewers.
 
 ## Conventions
 
@@ -45,12 +55,12 @@
   // bad
   type foo = ...;
   type BAR = ...;
-  type PersonType = { name: string }
+  type PersonType = ...;
 
   // good
   type Foo = ...;
   type Bar = ...;
-  type Person = { name: string };
+  type Person = ...;
   ```
 
 <a name="convensions-d-ts-extension"></a><a name="1.2"></a>
@@ -94,6 +104,7 @@
 
   // When the values need to be iterated upon.
   import { TupleToUnion } from "type-fest";
+
   const COLORS = ["red", "green", "blue"] as const;
   type Color = TupleToUnion<typeof COLORS>; // type: 'red' | 'green' | 'blue'
 
@@ -101,9 +112,9 @@
     printColor(color);
   }
 
-  // When you prefer to use object keys to access values over directly using literal values.
-  // i.e. `COLORS.Red` vs. `"red"`
+  // When the values should be accessed through object keys. (i.e. `COLORS.Red` vs. `"red"`)
   import { ValueOf } from "type-fest";
+
   const COLORS = {
     Red: "red",
     Green: "green",
@@ -118,7 +129,14 @@
 
 - [1.5](#convensions-unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand
 
-  > Why? `any` type bypasses type checking.
+  > Why? `any` type bypasses type checking. `unknown` is type safe as `unknown` type needs to be type narrowed before being used.
+
+  ```ts
+  const value: unknown = JSON.parse(someJson);
+  if (typeof value === 'string') {...}
+  else if (isPerson(value)) {...}
+  ...
+  ```
 
 <a name="convensions-array"></a><a name="1.6"></a>
 
@@ -138,7 +156,7 @@
 
 <a name="convension-ts-ignore"></a><a name="1.7"></a>
 
-- [1.7](#convension-ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` while the migration for errors that should be handled later.
+- [1.7](#convension-ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` during the migration for type errors that should be handled later.
 
 <a name="convension-ts-nullish-coalescing"></a><a name="1.8"></a>
 
@@ -206,7 +224,9 @@
 
 <a name="convension-proptypes-and-defaultprops"></a><a name="1.11"></a>
 
-- [1.11](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary. Refer to [the propTypes Migration Table](./PROPTYPES_CONVERSION_TABLE.md) on how to move away from `propTypes` and `defaultProps` using TypeScript and object destructing.
+- [1.11](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary.
+
+  > Refer to [the propTypes Migration Table](./PROPTYPES_CONVERSION_TABLE.md) on how to type props based on existing `propTypes`.
 
   ```tsx
   type GreetingProps = {
@@ -217,4 +237,60 @@
   function Greeting({ greeting = "hello", name = "world" }: ComponentProps) {
     <Text>{`${greeting}, ${name}`}</Text>;
   }
+  ```
+
+<a name="convension-use-utility-type"></a><a name="1.12"></a>
+
+- [1.12](#convension-utility-type) **Utility Types**: Use types from [TypeScript utility types](https://www.typescriptlang.org/docs/handbook/utility-types.html) and [`type-fest`](https://github.com/sindresorhus/type-fest) when possible.
+
+  ```ts
+  type Foo = {
+    bar: string;
+  };
+
+  // good
+  type ReadOnlyFoo = Readonly<Foo>;
+
+  // bad
+  type ReadOnlyFoo = {
+    readonly [Property in keyof Foo]: Foo[Property];
+  };
+  ```
+
+## Communication Items
+
+> Comment in the `#expensify-open-source` Slack channel if any of the following situations are encountered. Each comment should be prefixed with `TS ATTENTION:`. Internal engineers will access each situation and prescribe solutions to each case. Internal engineers should refer to general solutions to each situation that follows each list item.
+
+- I think types definitions in a third party library is incomplete or incorrect
+
+  When the library indeed contains incorrect type definitions and it cannot be updated, use module argumentation to correct them.
+
+  ```ts
+  declare module "external-library-name" {
+    interface LibraryComponentProps {
+      // Add or modify typings
+      additionalProp: string;
+    }
+  }
+  ```
+
+## Migration Guidelines
+
+> This section contains instructions that are applicable during the migration.
+
+- Found type bugs. Now what?
+
+  If TypeScript migration uncovers a bug that has been “invisible,” there are two options an author of a migration PR can take
+
+  - Fix issues if they are minor. Document each fix in the PR comment
+  - Suppress a TypeScript error stemming from the bug with `@ts-expect-error`. Create a separate GH issue. Prefix the issue title with `[TS ERROR #<issue-number-of-migration-PR>]`. Cross-link the migration PR and the created GH issue
+
+  The `@ts-expect-error` annotation tells the TS compiler to ignore any errors in the line that follows it. However, if there's no error in the line, TypeScript will also raise an error.
+
+  ```ts
+  // @ts-expect-error
+  const x: number = "This is a string"; // No TS error raised
+
+  // @ts-expect-error
+  const y: number = 123; // TS error: Unused '@ts-expect-error' directive.
   ```
