@@ -1,3 +1,5 @@
+# Expensify propTypes to TS Conversation Table
+
 | PropTypes                                                            | TypeScript                                    | Instructions                                                                                                                                                                                                                                  |
 | -------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PropTypes.any`                                                      | `T`, `Record<string, unknown>` or `any`       | Figure out what would be the correct data type and use it.<br><br>If you know that it's a object but isn't possible to determine the internal structure, use `Record<string, unknown>`.                                                       |
