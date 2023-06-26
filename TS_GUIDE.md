@@ -1,6 +1,6 @@
 # Expensify TypeScript React Native CheatSheet
 
-### Table of Contents
+## Table of Contents
 
 - [1.1 `props.children`](#convension-children)
 - [1.2 `forwardRef`](#forwardRef)
@@ -9,7 +9,7 @@
 - [1.5 Render Prop](#render-prop)
 - [1.6 Type Narrowing](#type-narrowing)
 
-### CheatSheet
+## CheatSheet
 
 - [1.1](#convension-children) **`props.children`**
 

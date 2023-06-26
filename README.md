@@ -1,9 +1,24 @@
 # Expensify TypeScript Style Guide
 
-## Other Resources
+## Other Expensify Resources on TypeScript
 
 - [TypeScript Short Guide](./TS_GUIDE.md)
 - [TypeScript Prop Conversion Table](./PROP_CONVERSTION_TABLE.md)
+
+## Learning Sources
+
+### Quickest way to learn TypeScript
+
+- Get up to speed quickly
+  Go through examples on [TypeScript playground](https://www.typescriptlang.org/play?q=231#example)
+- Handy Reference
+  - [TypeScript Cheatsheets](https://www.typescriptlang.org/static/TypeScript%20Types-ae199d69aeecf7d4a2704a528d0fd3f9.png)
+    - [Type](https://www.typescriptlang.org/static/TypeScript%20Types-ae199d69aeecf7d4a2704a528d0fd3f9.png)
+    - [Control Flow Analysis](https://www.typescriptlang.org/static/TypeScript%20Control%20Flow%20Analysis-8a549253ad8470850b77c4c5c351d457.png)
+- TypeScript with React
+  - React TypeScript Cheatsheet
+    - [List of built-in utility types](https://react-typescript-cheatsheet.netlify.app/docs/basic/troubleshooting/utilities)
+    - [HOC Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/hoc/)
 
 ## Table of Contents
 
