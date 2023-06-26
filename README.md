@@ -1,4 +1,23 @@
-## Organization
+# Expensify TypeScript Style Guide
+
+## Other Resources
+
+- [TypeScript Short Guide](./TS_GUIDE.md)
+- [TypeScript Prop Conversion Table](./PROP_CONVERSTION_TABLE.md);
+
+## Table of Contents
+
+- [1.1 Naming Conventions](#convension-naming-convension)
+- [1.2 `d.ts` Extension](#convensions-d-ts-extension)
+- [1.3 Type Alias vs. Interface](#convensions-type-alias-vs-interface)
+- [1.4 Enum vs. Union Type](#convensions-enum-vs-union-type)
+- [1.5 `unknown` vs. `any`](#convensions-unknown-vs-any)
+- [1.6 `T[]` vs. `Array<T>`](#convensions-array)
+- [1.7 @ts-ignore](#convension-ts-ignore)
+- [1.8 Optional chaining and nullish coalescing](#convension-ts-nullish-coalescing)
+- [1.9 Type Inference](#convension-type-inference)
+- [1.10 JSDoc](#conventions-jsdoc)
+- [1.11 `propTypes` and `defaultProps`](#convension-proptypes-and-defaultprops)
 
 ## Conventions
 
@@ -151,41 +170,15 @@
    */
   ```
 
-- [1.10](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them.
+- [1.10](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary. Refer to the Migration Guide on how to move away from `propTypes` and `defaultProps` using TypeScript and object destructing.
 
-  ```ts
-  // Before
-  const propTypes = {
-    requiredProp: PropTypes.string.isRequired,
-    optionalPropWithDefaultValue: PropTypes.number,
-    optionalProp: PropTypes.bool,
+  ```tsx
+  type GreetingProps = {
+    greeting: string;
+    name: string;
   };
 
-  const defaultProps = {
-    optionalPropWithDefaultValue: 42,
-  };
-
-  function Foo(props) {...}
-
-  Foo.propTypes = propTypes;
-  Foo.defaultProps = defaultProps;
-
-  export default Foo;
-
-  // After
-  type Props = {
-    requiredProp: string;
-    optionalPropWithDefaultValue?: number;
-    optionalProp?: boolean;
-  };
-
-  function Foo({
-    requiredProp,
-    optionalPropWithDefaultValue = 42,
-    optionalProp,
-  }: Props) {...}
+  function Greeting({ greeting = "hello", name = "world" }: ComponentProps) {
+    <Text>{`${greeting}, ${name}`}</Text>;
+  }
   ```
-
-```
-
-```
