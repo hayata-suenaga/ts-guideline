@@ -35,7 +35,6 @@
 - [1.10 JSDoc](#conventions-jsdoc)
 - [1.11 `propTypes` and `defaultProps`](#convension-proptypes-and-defaultprops)
 - [1.12 Utility Types](#convension-utility-types)
-
 - [Communication Items](#communication-items)
 - [Migration Guidelines](#migration-guidelines)
 
