@@ -240,7 +240,7 @@ This rule will apply until the migration is done. After the migration, exception
   }
   ```
 
-<a name="convension-use-utility-type"></a><a name="1.12"></a>
+<a name="convension-utility-type"></a><a name="1.12"></a>
 
 - [1.12](#convension-utility-type) **Utility Types**: Use types from [TypeScript utility types](https://www.typescriptlang.org/docs/handbook/utility-types.html) and [`type-fest`](https://github.com/sindresorhus/type-fest) when possible.
 
