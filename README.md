@@ -37,6 +37,8 @@
 
 ## Conventions
 
+<a name="convension-naming-convension"></a><a name="1.1"></a>
+
 - [1.1](#convension-naming-convension) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`
 
   ```ts
@@ -51,13 +53,13 @@
   type Person = { name: string };
   ```
 
-- [1.1](#convensions-d-ts-extension) **`d.ts` Extension**: Do not use `d.ts` file extension even when a file contains only type declarations.
+- [1.2](#convensions-d-ts-extension) **`d.ts` Extension**: Do not use `d.ts` file extension even when a file contains only type declarations.
 
   > Why? Type errors in `d.ts` files are not checked by TypeScript [^1].
 
 [^1]: This is because `skipLibCheck` TypeScript configuration is set to `true` in this project.
 
-- [1.2](#convensions-type-alias-vs-interface) **Type Alias vs. Interface**: Do not use `interface`. Use `type`.
+- [1.3](#convensions-type-alias-vs-interface) **Type Alias vs. Interface**: Do not use `interface`. Use `type`.
 
   > Why? In TypeScript, `type` and `interface` can be used interchangeably to declare types. Use `type` for consistency.
 
@@ -73,7 +75,7 @@
   };
   ```
 
-- [1.3](#convensions-enum-vs-union-type) **Enum vs. Union Type**: Do not use `enum`. Use union types.
+- [1.4](#convensions-enum-vs-union-type) **Enum vs. Union Type**: Do not use `enum`. Use union types.
 
   > Why? Enums come with several [pitfalls](https://blog.logrocket.com/why-typescript-enums-suck/). Most enum use cases can be replaced with union types.
 
@@ -106,11 +108,11 @@
   printColor(COLORS.Red);
   ```
 
-- [1.4](#convensions-unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand
+- [1.5](#convensions-unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand
 
   > Why? `any` type bypasses type checking.
 
-- [1.5](#convensions-array) **`T[]` vs. `Array<T>`**: Use T[] or readonly T[] for simple types (i.e. types which are just primitive names or type references). Use Array<T> or ReadonlyArray<T> for all other types (union types, intersection types, object types, function types, etc).
+- [1.6](#convensions-array) **`T[]` vs. `Array<T>`**: Use T[] or readonly T[] for simple types (i.e. types which are just primitive names or type references). Use Array<T> or ReadonlyArray<T> for all other types (union types, intersection types, object types, function types, etc).
 
   ```ts
   // Array<T>
@@ -124,9 +126,9 @@
   const f: readonly string[] = ["a", "b"];
   ```
 
-- [1.6](#convension-ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` while the migration for errors that should be handled later.
+- [1.7](#convension-ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` while the migration for errors that should be handled later.
 
-- [1.7](#convension-ts-nullish-coalescing) **Optional chaining and nullish coalescing**: Use optional chaining and nullish coalescing instead of the `get` lodash function.
+- [1.8](#convension-ts-nullish-coalescing) **Optional chaining and nullish coalescing**: Use optional chaining and nullish coalescing instead of the `get` lodash function.
 
   ```ts
   // Bad
@@ -137,7 +139,7 @@
   const name = user?.name ?? "default name";
   ```
 
-- [1.8](#convension-type-inference) **Type Inference**: When possible, allow the compiler to infer type of variables.
+- [1.9](#convension-type-inference) **Type Inference**: When possible, allow the compiler to infer type of variables.
 
   ```ts
   // Bad
@@ -165,7 +167,7 @@
   }
   ```
 
-- [1.9](#conventions-jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`
+- [1.10](#conventions-jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`
 
   ```ts
   // bad
@@ -184,7 +186,7 @@
    */
   ```
 
-- [1.10](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary. Refer to the Migration Guide on how to move away from `propTypes` and `defaultProps` using TypeScript and object destructing.
+- [1.11](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary. Refer to the Migration Guide on how to move away from `propTypes` and `defaultProps` using TypeScript and object destructing.
 
   ```tsx
   type GreetingProps = {
