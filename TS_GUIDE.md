@@ -8,6 +8,7 @@
 - [1.4 Style Props](#style-props)
 - [1.5 Render Prop](#render-prop)
 - [1.6 Type Narrowing](#type-narrowing)
+- [1.7 Errors in Type Catch Clauses](#try-catch-errors)
 
 ## CheatSheet
 
@@ -165,3 +166,18 @@
   ```
 
   In the above code, `employee is Manager` is Type Predicate. It signifies that the return type of `isManager` is a `boolean`, indicating whether a value passed to the function is of a certain type (e.g. `Manager`).
+
+- [1.7] **Error in Try Catch Clauses**
+
+  Errors in try/catch clauses are typed as unknown, if the developer needs to use the error data they must conditionally check the type of the data first. Use type narrowing
+
+  ```ts
+  try {
+      ....
+  } catch (e) { // `e` is `unknown`.
+      if (e instanceof Error) {
+          // you can access properties on Error
+          console.error(e.message);
+      }
+  }
+  ```
