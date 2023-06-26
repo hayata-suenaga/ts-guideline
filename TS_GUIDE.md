@@ -9,6 +9,8 @@
 - [1.5 Render Prop](#render-prop)
 - [1.6 Type Narrowing](#type-narrowing)
 
+### CheatSheet
+
 - [1.1](#convension-children) **`props.children`**
 
   ```tsx
