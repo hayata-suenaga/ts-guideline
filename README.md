@@ -2,8 +2,8 @@
 
 ## Other Expensify Resources on TypeScript
 
-- [TypeScript Short Guide](./TS_GUIDE.md)
-- [TypeScript Prop Conversion Table](./PROP_CONVERSTION_TABLE.md)
+- [Expensify TypeScript React Native CheatSheet](./TS_GUIDE.md)
+- [Expensify TypeScript PropTypes Conversion Table](./PROPTYPES_CONVERSION_TABLE.md)
 
 ## Learning Sources
 
@@ -206,7 +206,7 @@
 
 <a name="convension-proptypes-and-defaultprops"></a><a name="1.11"></a>
 
-- [1.11](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary. Refer to the Migration Guide on how to move away from `propTypes` and `defaultProps` using TypeScript and object destructing.
+- [1.11](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary. Refer to [the propTypes Migration Table](./PROPTYPES_CONVERSION_TABLE.md) on how to move away from `propTypes` and `defaultProps` using TypeScript and object destructing.
 
   ```tsx
   type GreetingProps = {
