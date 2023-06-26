@@ -10,7 +10,8 @@
 ### Quickest way to learn TypeScript
 
 - Get up to speed quickly
-  Go through examples on [TypeScript playground](https://www.typescriptlang.org/play?q=231#example)
+  - [TypeScript playground](https://www.typescriptlang.org/play?q=231#example)
+    - Go though all examples on the playground. Click on "Example" tab on the top
 - Handy Reference
   - [TypeScript CheatSheet](https://www.typescriptlang.org/static/TypeScript%20Types-ae199d69aeecf7d4a2704a528d0fd3f9.png)
     - [Type](https://www.typescriptlang.org/static/TypeScript%20Types-ae199d69aeecf7d4a2704a528d0fd3f9.png)
