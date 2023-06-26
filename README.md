@@ -2,7 +2,7 @@
 
 ## Other Expensify Resources on TypeScript
 
-- [Expensify TypeScript React Native CheatSheet](./TS_GUIDE.md)
+- [Expensify TypeScript React Native CheatSheet](./TS_CHEATSHEET.md)
 - [Expensify TypeScript PropTypes Conversion Table](./PROPTYPES_CONVERSION_TABLE.md)
 
 ## Learning Sources
