@@ -3,7 +3,7 @@
 ## Other Resources
 
 - [TypeScript Short Guide](./TS_GUIDE.md)
-- [TypeScript Prop Conversion Table](./PROP_CONVERSTION_TABLE.md);
+- [TypeScript Prop Conversion Table](./PROP_CONVERSTION_TABLE.md)
 
 ## Table of Contents
 
@@ -22,8 +22,6 @@
 ## Conventions
 
 - [1.1](#convension-naming-convension) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`
-
-- Use PascalCase for type names
 
   ```ts
   // bad
