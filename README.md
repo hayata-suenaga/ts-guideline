@@ -35,6 +35,8 @@
 - [1.10 JSDoc](#conventions-jsdoc)
 - [1.11 `propTypes` and `defaultProps`](#convension-proptypes-and-defaultprops)
 - [1.12 Utility Types](#convension-utility-types)
+- [1.13 `object` Type](#convension-object-type)
+- [1.14 Export Prop Types](#convension-export-prop-types)
 - [Communication Items](#communication-items)
 - [Migration Guidelines](#migration-guidelines)
 
@@ -255,6 +257,44 @@ This rule will apply until the migration is done. After the migration, exception
     readonly [Property in keyof Foo]: Foo[Property];
   };
   ```
+
+<a name="convension-object-type"></a><a name="1.13"></a>
+
+- [1.13](#convension-object-type) **`object`**: Don't use `object` type.
+
+> Why? `object` refers to "any non-primitive type," not "any object". Typing "any non-primitive value" is not commonly needed.
+
+```ts
+// bad
+const foo: object = [1, 2, 3]; // TypeScript does not error
+```
+
+If you know that the type of data is an object but don't know what properties or values it has beforehand, use `Record<string, unknown>`.
+
+<a name="convension-export-prop-types"></a><a name="1.14"></a>
+
+- [1.14](#convension-export-prop-types) **Prop Types**: Define and export prop types for components. Use exported prop types instead of grabbing the prop type from a component.
+
+> Why? Exporting prop types aids reusability.
+
+```tsx
+// MyComponent.tsx
+export type MyComponentProps = {
+  foo: string;
+};
+
+export default function MyComponent({ foo }: MyComponentProps) {
+  return <Text>{foo}</Text>;
+}
+
+// bad
+import { ComponentProps } from "React";
+import MyComponent from "./MyComponent";
+type MyComponentProps = ComponentProps<typeof MyComponent>;
+
+// good
+import MyComponent, { MyComponentProps } from "./MyComponent";
+```
 
 ## Communication Items
 
