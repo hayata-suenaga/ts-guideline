@@ -316,30 +316,65 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
 
   > Why? To encourage consistent API across platform-specific implementations.
 
-  <details>
-    <summary>Example of a React component module</summary>
-    
-    ```ts
+  ```tx
+  // types.ts
+  type VisibilityInterface = {
+    isVisible: () => boolean;
+    hasFocus: () => boolean;
+  };
+
+  export default VisibilityInterface;
+
+  // index.ts
+  function isVisible() {
+    return document.visibilityState === "visible";
+  }
+
+  function hasFocus() {
+    return document.hasFocus();
+  }
+
+  const Visibility: VisibilityInterface = {
+    isVisible,
+    hasFocus,
+  };
+
+  export default Visibility;
+
+  // index.native.ts
+  function isVisible() {
+    return AppState.currentState === "active";
+  }
+
+  function hasFocus() {
+    return true;
+  }
+
+  const Visibility: VisibilityInterface = {
+    isVisible,
+    hasFocus,
+  };
+
+  export default Visibility;
+  ```
+
+  ```ts
     // types.ts
     export type MyComponentProps = {
       foo: string;
     }
 
-  // index.ios.ts
-  import { MyComponentProps } from ./types.ts;
+    // index.ios.ts
+    import { MyComponentProps } from ./types.ts;
 
-  export MyComponentProps;
-  export default function MyComponent({ foo }: MyComponentProps) {...}
+    export MyComponentProps;
+    export default function MyComponent({ foo }: MyComponentProps) {...}
 
-  // index.ts
-  import { MyComponentProps } from ./types.ts;
+    // index.ts
+    import { MyComponentProps } from ./types.ts;
 
-  export MyComponentProps;
-  export default function MyComponent({ foo }: MyComponentProps) {...}
-
-  ```
-
-  </details>
+    export MyComponentProps;
+    export default function MyComponent({ foo }: MyComponentProps) {...}
   ```
 
 ## Communication Items
