@@ -326,10 +326,10 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
   // index.native.ts
   import { GreetingModule } from "./types.ts";
   function sayHello() {
-    console.log("hello from native code");
+    console.log("hello from mobile code");
   }
   function sayGoodbye() {
-    console.log("goodbye from native code");
+    console.log("goodbye from mobile code");
   }
   const Greeting: GreetingModule = {
     sayHello,
