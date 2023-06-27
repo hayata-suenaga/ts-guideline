@@ -339,7 +339,6 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
 
   // index.ts
   import { GreetingModule } from "./types.ts";
-
   ...
   const Greeting: GreetingModule = {
   ...
