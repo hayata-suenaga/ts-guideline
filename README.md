@@ -316,12 +316,12 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
 
   > Why? To encourage consistent API across platform-specific implementations.
 
-<details>
-  <summary>Example for a React component module</summary>
-  
-  hello
+  <details>
+    <summary>Example for a React component module</summary>
+    
+    hello
 
-</details>
+  </details>
 
 ## Communication Items
 
