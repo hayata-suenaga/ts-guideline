@@ -19,6 +19,7 @@
 - [1.12 Utility Types](#convension-utility-types)
 - [1.13 `object` Type](#convension-object-type)
 - [1.14 Export Prop Types](#convension-export-prop-types)
+- [1.15 File Organization](#convension-file-organization)
 - [Communication Items](#communication-items)
 - [Migration Guidelines](#migration-guidelines)
 
@@ -274,6 +275,16 @@ const foo: object = [1, 2, 3]; // TypeScript does not error
 
 If you know that the type of data is an object but don't know what properties or values it has beforehand, use `Record<string, unknown>`.
 
+> Even though `string` is specified as a key, `Record<string, unknown>` type can still accepts objects whose keys are numbers or symbols. This is because number and
+
+```ts
+function logObject(object: Record<string, unknown>) {
+  for (const [key, value] of Object.entries(object)) {
+    console.log(`${key}: ${value}`);
+  }
+}
+```
+
 <a name="convension-export-prop-types"></a><a name="1.14"></a>
 
 - [1.14](#convension-export-prop-types) **Prop Types**: Define and export prop types for components. Use exported prop types instead of grabbing the prop type from a component.
@@ -297,6 +308,31 @@ type MyComponentProps = ComponentProps<typeof MyComponent>;
 
 // good
 import MyComponent, { MyComponentProps } from "./MyComponent";
+```
+
+<a name="convension-file-organization"></a><a name="1.15"></a>
+
+- [1.15](#convension-file-organization) **File organization**: In modules with platform-specific implementations, create `types.ts` to define shared types. Import and use shared types in each platform specific files.
+
+> Why? To encourage consistent API across platform-specific implementations.
+
+```ts
+// types.ts
+export type MyComponentProps = {
+  foo: string;
+}
+
+// index.ios.ts
+import { MyComponentProps } from ./types.ts;
+
+export MyComponentProps;
+export default function MyComponent({ foo }: MyComponentProps) {...}
+
+// index.ts
+import { MyComponentProps } from ./types.ts;
+
+export MyComponentProps;
+export default function MyComponent({ foo }: MyComponentProps) {...}
 ```
 
 ## Communication Items
@@ -325,13 +361,14 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
   If TypeScript migration uncovers a bug that has been “invisible,” there are two options an author of a migration PR can take
 
   - Fix issues if they are minor. Document each fix in the PR comment
-  - Suppress a TypeScript error stemming from the bug with `@ts-expect-error`. Create a separate GH issue. Prefix the issue title with `[TS ERROR #<issue-number-of-migration-PR>]`. Cross-link the migration PR and the created GH issue
+  - Suppress a TypeScript error stemming from the bug with `@ts-expect-error`. Create a separate GH issue. Prefix the issue title with `[TS ERROR #<issue-number-of-migration-PR>]`. Cross-link the migration PR and the created GH issue. On the line below `@ts-expect-error`, put down the GH issue number prefixed with `TODO:`.
 
   The `@ts-expect-error` annotation tells the TS compiler to ignore any errors in the line that follows it. However, if there's no error in the line, TypeScript will also raise an error.
 
   ```ts
   // @ts-expect-error
-  const x: number = "This is a string"; // No TS error raised
+  // TODO: #21647
+  const x: number = "123"; // No TS error raised
 
   // @ts-expect-error
   const y: number = 123; // TS error: Unused '@ts-expect-error' directive.
