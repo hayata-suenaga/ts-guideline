@@ -314,7 +314,7 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
 
 - [1.15](#convension-file-organization) **File organization**: In modules with platform-specific implementations, create `types.ts` to define shared types. Import and use shared types in each platform specific files.
 
-> Why? To encourage consistent API across platform-specific implementations.
+  > Why? To encourage consistent API across platform-specific implementations.
 
 <details>
   <summary>Example for a React component module</summary>
