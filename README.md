@@ -316,30 +316,29 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
 
 > Why? To encourage consistent API across platform-specific implementations.
 
-<details>
-  <summary>Example for a React component module</summary>
-  
-  ```ts
-  // types.ts
-  export type MyComponentProps = {
-    foo: string;
-  }
+  <details>
+    <summary>Example for a React component module</summary>
+    
+    ```ts
+    // types.ts
+    export type MyComponentProps = {
+      foo: string;
+    }
 
-// index.ios.ts
-import { MyComponentProps } from ./types.ts;
+    // index.ios.ts
+    import { MyComponentProps } from ./types.ts;
 
-export MyComponentProps;
-export default function MyComponent({ foo }: MyComponentProps) {...}
+    export MyComponentProps;
+    export default function MyComponent({ foo }: MyComponentProps) {...}
 
-// index.ts
-import { MyComponentProps } from ./types.ts;
+    // index.ts
+    import { MyComponentProps } from ./types.ts;
 
-export MyComponentProps;
-export default function MyComponent({ foo }: MyComponentProps) {...}
+    export MyComponentProps;
+    export default function MyComponent({ foo }: MyComponentProps) {...}
+    ```
 
-````
-</details>
-
+  </details>
 
 ## Communication Items
 
@@ -356,7 +355,7 @@ declare module "external-library-name" {
     additionalProp: string;
   }
 }
-````
+```
 
 ## Migration Guidelines
 
