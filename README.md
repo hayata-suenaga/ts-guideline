@@ -318,30 +318,30 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
 
   ```ts
   // types.ts
-  type GoodbyeModule = {
+  type GreetingModule = {
     sayHello: () => boolean;
     sayGoodbye: () => boolean;
   };
 
   // index.native.ts
-  import { GoodbyeModule } from "./types.ts";
+  import { GreetingModule } from "./types.ts";
   function sayHello() {
     console.log("hello from native code");
   }
   function sayGoodbye() {
     console.log("goodbye from native code");
   }
-  const Visibility: GoodbyeModule = {
-    isVisible,
-    hasFocus,
+  const Greeting: GreetingModule = {
+    sayHello,
+    sayGoodbye,
   };
-  export default Visibility;
+  export default Greeting;
 
   // index.ts
-  import { GoodbyeModule } from "./types.ts";
+  import { GreetingModule } from "./types.ts";
 
   ...
-  const Visibility: GoodbyeModule = {
+  const Greeting: GreetingModule = {
   ...
   ```
 
