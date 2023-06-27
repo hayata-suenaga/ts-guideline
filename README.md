@@ -317,11 +317,30 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
   > Why? To encourage consistent API across platform-specific implementations.
 
   <details>
-    <summary>Example for a React component module</summary>
+    <summary>Example of a React component module</summary>
     
-    hello
+    ```ts
+    // types.ts
+    export type MyComponentProps = {
+      foo: string;
+    }
+
+  // index.ios.ts
+  import { MyComponentProps } from ./types.ts;
+
+  export MyComponentProps;
+  export default function MyComponent({ foo }: MyComponentProps) {...}
+
+  // index.ts
+  import { MyComponentProps } from ./types.ts;
+
+  export MyComponentProps;
+  export default function MyComponent({ foo }: MyComponentProps) {...}
+
+  ```
 
   </details>
+  ```
 
 ## Communication Items
 
