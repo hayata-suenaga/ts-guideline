@@ -318,44 +318,31 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
 
   ```ts
   // types.ts
-  type VisibilityInterface = {
-    isVisible: () => boolean;
-    hasFocus: () => boolean;
+  type GoodbyeModule = {
+    sayHello: () => boolean;
+    sayGoodbye: () => boolean;
   };
-
-  export default VisibilityInterface;
-
-  // index.ts
-  function isVisible() {
-    return document.visibilityState === "visible";
-  }
-
-  function hasFocus() {
-    return document.hasFocus();
-  }
-
-  const Visibility: VisibilityInterface = {
-    isVisible,
-    hasFocus,
-  };
-
-  export default Visibility;
 
   // index.native.ts
-  function isVisible() {
-    return AppState.currentState === "active";
+  import { GoodbyeModule } from "./types.ts";
+  function sayHello() {
+    console.log("hello from native code");
   }
-
-  function hasFocus() {
-    return true;
+  function sayGoodbye() {
+    console.log("goodbye from native code");
   }
-
-  const Visibility: VisibilityInterface = {
+  const Visibility: GoodbyeModule = {
     isVisible,
     hasFocus,
   };
-
   export default Visibility;
+
+  // index.ts
+  import { GoodbyeModule } from "./types.ts";
+
+  ...
+  const Visibility: GoodbyeModule = {
+  ...
   ```
 
   ```ts
