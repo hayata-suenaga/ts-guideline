@@ -319,24 +319,7 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
   <details>
     <summary>Example for a React component module</summary>
     
-    ```ts
-    // types.ts
-    export type MyComponentProps = {
-      foo: string;
-    }
-
-    // index.ios.ts
-    import { MyComponentProps } from ./types.ts;
-
-    export MyComponentProps;
-    export default function MyComponent({ foo }: MyComponentProps) {...}
-
-    // index.ts
-    import { MyComponentProps } from ./types.ts;
-
-    export MyComponentProps;
-    export default function MyComponent({ foo }: MyComponentProps) {...}
-    ```
+    hello
 
   </details>
 
