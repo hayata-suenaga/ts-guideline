@@ -316,11 +316,14 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
 
 > Why? To encourage consistent API across platform-specific implementations.
 
-```ts
-// types.ts
-export type MyComponentProps = {
-  foo: string;
-}
+<details>
+  <summary>Example for a React component module</summary>
+  
+  ```ts
+  // types.ts
+  export type MyComponentProps = {
+    foo: string;
+  }
 
 // index.ios.ts
 import { MyComponentProps } from ./types.ts;
@@ -333,7 +336,10 @@ import { MyComponentProps } from ./types.ts;
 
 export MyComponentProps;
 export default function MyComponent({ foo }: MyComponentProps) {...}
-```
+
+````
+</details>
+
 
 ## Communication Items
 
@@ -341,16 +347,16 @@ export default function MyComponent({ foo }: MyComponentProps) {...}
 
 - I think types definitions in a third party library is incomplete or incorrect
 
-  When the library indeed contains incorrect type definitions and it cannot be updated, use module argumentation to correct them.
+When the library indeed contains incorrect type definitions and it cannot be updated, use module argumentation to correct them.
 
-  ```ts
-  declare module "external-library-name" {
-    interface LibraryComponentProps {
-      // Add or modify typings
-      additionalProp: string;
-    }
+```ts
+declare module "external-library-name" {
+  interface LibraryComponentProps {
+    // Add or modify typings
+    additionalProp: string;
   }
-  ```
+}
+````
 
 ## Migration Guidelines
 
