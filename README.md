@@ -316,7 +316,7 @@ import MyComponent, { MyComponentProps } from "./MyComponent";
 
   > Why? To encourage consistent API across platform-specific implementations.
 
-  ```tx
+  ```ts
   // types.ts
   type VisibilityInterface = {
     isVisible: () => boolean;
