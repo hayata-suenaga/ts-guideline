@@ -344,9 +344,11 @@ This rule will apply until the migration is done. After the migration, exception
 
   // index.ts
   import { GreetingModule } from "./types.ts";
-  ...
+
   const Greeting: GreetingModule = {
-  ...
+    // sayHello and sayGoodbye implementations
+  };
+  export Greeting;
   ```
 
   ```ts
