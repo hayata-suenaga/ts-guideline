@@ -5,6 +5,7 @@
 - [Other Expensify Resources on TypeScript](#other-expensify-resources-on-typescript)
 - [Learning Resources](#learning-resources)
 - [Exception to Rules](#exception-to-rules)
+- [General Rules](#general-rules)
 - [Guidelines](#guidelines)
   - [1.1 Naming Conventions](#convension-naming-convension)
   - [1.2 `d.ts` Extension](#convensions-d-ts-extension)
@@ -50,6 +51,17 @@
 Most of the rules are enforced in ESLint or checked by TypeScript. If you think your particular situation warrants an exception, post the context in the `#expensify-open-source` Slack channel with your message prefixed with `TS EXCEPTION:`. Internal engineers will assess the case and suggest alternative or grants an exception. When an exception is granted, link the relevant Slack conversation in your pull request. Suppress ESLint or TypeScript warnings/errors with comments if necessary.
 
 This rule will apply until the migration is done. After the migration, exceptions are assessed and granted by PR reviewers.
+
+## General Rules
+
+Strive to type as strictly as possible.
+
+```ts
+type Foo = {
+  fetchingStatus: "loading" | "success" | "error"; // vs. fetchingStatus: string;
+  person: { name: string; age: number }; // vs. person: Record<string, unknown>;
+};
+```
 
 ## Guidelines
 
@@ -322,35 +334,45 @@ This rule will apply until the migration is done. After the migration, exception
 
   > Why? To encourage consistent API across platform-specific implementations.
 
+  Utility module example
+
   ```ts
   // types.ts
   type GreetingModule = {
-    sayHello: () => boolean;
-    sayGoodbye: () => boolean;
+    getHello: () => string;
+    getGoodbye: () => string;
   };
 
   // index.native.ts
   import { GreetingModule } from "./types.ts";
-  function sayHello() {
-    console.log("hello from mobile code");
+  function getHello() {
+    return "hello from mobile code";
   }
-  function sayGoodbye() {
-    console.log("goodbye from mobile code");
+  function getGoodbye() {
+    return "goodbye from mobile code";
   }
   const Greeting: GreetingModule = {
-    sayHello,
-    sayGoodbye,
+    getHello,
+    getGoodbye,
   };
   export default Greeting;
 
   // index.ts
   import { GreetingModule } from "./types.ts";
-
+  function getHello() {
+    return "hello from other platform code";
+  }
+  function getGoodbye() {
+    return "goodbye from other platform code";
+  }
   const Greeting: GreetingModule = {
-    // sayHello and sayGoodbye implementations
+    getHello,
+    getGoodbye,
   };
-  export Greeting;
+  export default Greeting;
   ```
+
+  Component module example
 
   ```ts
     // types.ts
@@ -370,6 +392,16 @@ This rule will apply until the migration is done. After the migration, exception
     export MyComponentProps;
     export default function MyComponent({ foo }: MyComponentProps) {...}
   ```
+
+- [1.16] **Reusable Types**: Reusable type definitions, such as models (e.g. Report), must have their own file and be placed under `src/types/`. The type should be exported as a default export.
+
+```ts
+// src/types/Report.ts
+
+type Report = {...};
+
+export default Report;
+```
 
 ## Communication Items
 
