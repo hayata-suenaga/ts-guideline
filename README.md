@@ -333,7 +333,7 @@ type Foo = {
 
 - [1.15](#file-organization) **File organization**: In modules with platform-specific implementations, create `types.ts` to define shared types. Import and use shared types in each platform specific files.
 
-  > Why? To encourage consistent API across platform-specific implementations.
+  > Why? To encourage consistent API across platform-specific implementations. If you're migrating module that doesn't have a default implement (i.e. `index.ts`, e.g. `getPlatform`), refer to [Migration Guidelines](#migration-guidelines) for further information.
 
   Utility module example
 
@@ -426,6 +426,8 @@ declare module "external-library-name" {
 ## Migration Guidelines
 
 > This section contains instructions that are applicable during the migration.
+
+- If you're migrating a module that doesn't have a default implementation (i.e. `index.ts`, e.g. `getPlatform`), convert `index.website.js` to `index.ts`. Without `index.ts`, TypeScript cannot get type information where the module is imported.
 
 - Found type bugs. Now what?
 
