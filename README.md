@@ -7,23 +7,24 @@
 - [Exception to Rules](#exception-to-rules)
 - [General Rules](#general-rules)
 - [Guidelines](#guidelines)
-  - [1.1 Naming Conventions](#convension-naming-convension)
-  - [1.2 `d.ts` Extension](#convensions-d-ts-extension)
-  - [1.3 Type Alias vs. Interface](#convensions-type-alias-vs-interface)
-  - [1.4 Enum vs. Union Type](#convensions-enum-vs-union-type)
-  - [1.5 `unknown` vs. `any`](#convensions-unknown-vs-any)
-  - [1.6 `T[]` vs. `Array<T>`](#convensions-array)
-  - [1.7 @ts-ignore](#convension-ts-ignore)
-  - [1.8 Optional chaining and nullish coalescing](#convension-ts-nullish-coalescing)
-  - [1.9 Type Inference](#convension-type-inference)
-  - [1.10 JSDoc](#conventions-jsdoc)
-  - [1.11 `propTypes` and `defaultProps`](#convension-proptypes-and-defaultprops)
-  - [1.12 Utility Types](#convension-utility-types)
-  - [1.13 `object` Type](#convension-object-type)
-  - [1.14 Export Prop Types](#convension-export-prop-types)
-  - [1.15 File Organization](#convension-file-organization)
-- [Communication Items](#communication-items)
-- [Migration Guidelines](#migration-guidelines)
+  - [1.1 Naming Conventions](#naming-convension)
+  - [1.2 `d.ts` Extension](#d-ts-extension)
+  - [1.3 Type Alias vs. Interface](#type-alias-vs-interface)
+  - [1.4 Enum vs. Union Type](#enum-vs-union-type)
+  - [1.5 `unknown` vs. `any`](#unknown-vs-any)
+  - [1.6 `T[]` vs. `Array<T>`](#array)
+  - [1.7 @ts-ignore](#ts-ignore)
+  - [1.8 Optional chaining and nullish coalescing](#ts-nullish-coalescing)
+  - [1.9 Type Inference](#type-inference)
+  - [1.10 JSDoc](#jsdoc)
+  - [1.11 `propTypes` and `defaultProps`](#proptypes-and-defaultprops)
+  - [1.12 Utility Types](#utility-types)
+  - [1.13 `object` Type](#object-type)
+  - [1.14 Export Prop Types](#export-prop-types)
+  - [1.15 File Organization](#file-organization)
+  - [1.26 Reusable Types](#reusable-types)
+- [Communication Items](#items)
+- [Migration Guidelines](#guidelines)
 
 ## Other Expensify Resources on TypeScript
 
@@ -65,9 +66,9 @@ type Foo = {
 
 ## Guidelines
 
-<a name="convension-naming-convension"></a><a name="1.1"></a>
+<a name="naming-convension"></a><a name="1.1"></a>
 
-- [1.1](#convension-naming-convension) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`. eslint: [`@typescript-eslint/naming-convention`](https://typescript-eslint.io/rules/naming-convention/)
+- [1.1](#naming-convension) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`. eslint: [`@typescript-eslint/naming-convention`](https://typescript-eslint.io/rules/naming-convention/)
 
   ```ts
   // bad
@@ -81,17 +82,17 @@ type Foo = {
   type Person = ...;
   ```
 
-<a name="convensions-d-ts-extension"></a><a name="1.2"></a>
+<a name="d-ts-extension"></a><a name="1.2"></a>
 
-- [1.2](#convensions-d-ts-extension) **`d.ts` Extension**: Do not use `d.ts` file extension even when a file contains only type declarations.
+- [1.2](#d-ts-extension) **`d.ts` Extension**: Do not use `d.ts` file extension even when a file contains only type declarations.
 
   > Why? Type errors in `d.ts` files are not checked by TypeScript [^1].
 
 [^1]: This is because `skipLibCheck` TypeScript configuration is set to `true` in this project.
 
-<a name="convensions-type-alias-vs-interface"></a><a name="1.3"></a>
+<a name="type-alias-vs-interface"></a><a name="1.3"></a>
 
-- [1.3](#convensions-type-alias-vs-interface) **Type Alias vs. Interface**: Do not use `interface`. Use `type`. eslint: [`@typescript-eslint/consistent-type-definitions`](https://typescript-eslint.io/rules/consistent-type-definitions/)
+- [1.3](#type-alias-vs-interface) **Type Alias vs. Interface**: Do not use `interface`. Use `type`. eslint: [`@typescript-eslint/consistent-type-definitions`](https://typescript-eslint.io/rules/consistent-type-definitions/)
 
   > Why? In TypeScript, `type` and `interface` can be used interchangeably to declare types. Use `type` for consistency.
 
@@ -107,9 +108,9 @@ type Foo = {
   };
   ```
 
-<a name="convensions-enum-vs-union-type"></a><a name="1.4"></a>
+<a name="enum-vs-union-type"></a><a name="1.4"></a>
 
-- [1.4](#convensions-enum-vs-union-type) **Enum vs. Union Type**: Do not use `enum`. Use union types. eslint: [`no-restricted-syntax`](https://eslint.org/docs/latest/rules/no-restricted-syntax)
+- [1.4](#enum-vs-union-type) **Enum vs. Union Type**: Do not use `enum`. Use union types. eslint: [`no-restricted-syntax`](https://eslint.org/docs/latest/rules/no-restricted-syntax)
 
   > Why? Enums come with several [pitfalls](https://blog.logrocket.com/why-typescript-enums-suck/). Most enum use cases can be replaced with union types.
 
@@ -143,9 +144,9 @@ type Foo = {
   printColor(COLORS.Red);
   ```
 
-<a name="convensions-unknown-vs-any"></a><a name="1.5"></a>
+<a name="unknown-vs-any"></a><a name="1.5"></a>
 
-- [1.5](#convensions-unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand. eslint: [`@typescript-eslint/no-explicit-any'`](https://typescript-eslint.io/rules/no-explicit-any/)
+- [1.5](#unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand. eslint: [`@typescript-eslint/no-explicit-any'`](https://typescript-eslint.io/rules/no-explicit-any/)
 
   > Why? `any` type bypasses type checking. `unknown` is type safe as `unknown` type needs to be type narrowed before being used.
 
@@ -156,9 +157,9 @@ type Foo = {
   ...
   ```
 
-<a name="convensions-array"></a><a name="1.6"></a>
+<a name="array"></a><a name="1.6"></a>
 
-- [1.6](#convensions-array) **`T[]` vs. `Array<T>`**: Use `T[]` or `readonly T[]` for simple types (i.e. types which are just primitive names or type references). Use `Array<T>` or `ReadonlyArray<T>` for all other types (union types, intersection types, object types, function types, etc). eslint: [`@typescript-eslint/array-type`](https://typescript-eslint.io/rules/array-type/)
+- [1.6](#array) **`T[]` vs. `Array<T>`**: Use `T[]` or `readonly T[]` for simple types (i.e. types which are just primitive names or type references). Use `Array<T>` or `ReadonlyArray<T>` for all other types (union types, intersection types, object types, function types, etc). eslint: [`@typescript-eslint/array-type`](https://typescript-eslint.io/rules/array-type/)
 
   ```ts
   // Array<T>
@@ -172,13 +173,13 @@ type Foo = {
   const f: readonly string[] = ["a", "b"];
   ```
 
-<a name="convension-ts-ignore"></a><a name="1.7"></a>
+<a name="ts-ignore"></a><a name="1.7"></a>
 
-- [1.7](#convension-ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` during the migration for type errors that should be handled later. eslint: [`@typescript-eslint/ban-ts-comment`](https://typescript-eslint.io/rules/ban-ts-comment/)
+- [1.7](#ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` during the migration for type errors that should be handled later. eslint: [`@typescript-eslint/ban-ts-comment`](https://typescript-eslint.io/rules/ban-ts-comment/)
 
-<a name="convension-ts-nullish-coalescing"></a><a name="1.8"></a>
+<a name="ts-nullish-coalescing"></a><a name="1.8"></a>
 
-- [1.8](#convension-ts-nullish-coalescing) **Optional chaining and nullish coalescing**: Use optional chaining and nullish coalescing instead of the `get` lodash function. eslint: [`no-restricted-imports`](https://eslint.org/docs/latest/rules/no-restricted-imports)
+- [1.8](#ts-nullish-coalescing) **Optional chaining and nullish coalescing**: Use optional chaining and nullish coalescing instead of the `get` lodash function. eslint: [`no-restricted-imports`](https://eslint.org/docs/latest/rules/no-restricted-imports)
 
   ```ts
   // Bad
@@ -189,9 +190,9 @@ type Foo = {
   const name = user?.name ?? "default name";
   ```
 
-<a name="convension-type-inference"></a><a name="1.9"></a>
+<a name="type-inference"></a><a name="1.9"></a>
 
-- [1.9](#convension-type-inference) **Type Inference**: When possible, allow the compiler to infer type of variables.
+- [1.9](#type-inference) **Type Inference**: When possible, allow the compiler to infer type of variables.
 
   ```ts
   // Bad
@@ -219,9 +220,9 @@ type Foo = {
   }
   ```
 
-<a name="conventions-jsdoc"></a><a name="1.10"></a>
+<a name="jsdoc"></a><a name="1.10"></a>
 
-- [1.10](#conventions-jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`. eslint: [`jsdoc/no-types`](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/.README/rules/no-types.md)
+- [1.10](#jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`. eslint: [`jsdoc/no-types`](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/.README/rules/no-types.md)
 
   ```ts
   // bad
@@ -240,9 +241,9 @@ type Foo = {
    */
   ```
 
-<a name="convension-proptypes-and-defaultprops"></a><a name="1.11"></a>
+<a name="proptypes-and-defaultprops"></a><a name="1.11"></a>
 
-- [1.11](#convension-proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary.
+- [1.11](#proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary.
 
   > Refer to [the propTypes Migration Table](./PROPTYPES_CONVERSION_TABLE.md) on how to type props based on existing `propTypes`.
 
@@ -262,9 +263,9 @@ type Foo = {
   }
   ```
 
-<a name="convension-utility-types"></a><a name="1.12"></a>
+<a name="utility-types"></a><a name="1.12"></a>
 
-- [1.12](#convension-utility-types) **Utility Types**: Use types from [TypeScript utility types](https://www.typescriptlang.org/docs/handbook/utility-types.html) and [`type-fest`](https://github.com/sindresorhus/type-fest) when possible.
+- [1.12](#utility-types) **Utility Types**: Use types from [TypeScript utility types](https://www.typescriptlang.org/docs/handbook/utility-types.html) and [`type-fest`](https://github.com/sindresorhus/type-fest) when possible.
 
   ```ts
   type Foo = {
@@ -280,9 +281,9 @@ type Foo = {
   };
   ```
 
-<a name="convension-object-type"></a><a name="1.13"></a>
+<a name="object-type"></a><a name="1.13"></a>
 
-- [1.13](#convension-object-type) **`object`**: Don't use `object` type. eslint: [`@typescript-eslint/ban-types`](https://typescript-eslint.io/rules/ban-types/)
+- [1.13](#object-type) **`object`**: Don't use `object` type. eslint: [`@typescript-eslint/ban-types`](https://typescript-eslint.io/rules/ban-types/)
 
   > Why? `object` refers to "any non-primitive type," not "any object". Typing "any non-primitive value" is not commonly needed.
 
@@ -303,9 +304,9 @@ type Foo = {
   }
   ```
 
-<a name="convension-export-prop-types"></a><a name="1.14"></a>
+<a name="export-prop-types"></a><a name="1.14"></a>
 
-- [1.14](#convension-export-prop-types) **Prop Types**: Define and export prop types for components. Use exported prop types instead of grabbing the prop type from a component.
+- [1.14](#export-prop-types) **Prop Types**: Define and export prop types for components. Use exported prop types instead of grabbing the prop type from a component.
 
   > Why? Exporting prop types aids reusability.
 
@@ -328,9 +329,9 @@ type Foo = {
   import MyComponent, { MyComponentProps } from "./MyComponent";
   ```
 
-<a name="convension-file-organization"></a><a name="1.15"></a>
+<a name="file-organization"></a><a name="1.15"></a>
 
-- [1.15](#convension-file-organization) **File organization**: In modules with platform-specific implementations, create `types.ts` to define shared types. Import and use shared types in each platform specific files.
+- [1.15](#file-organization) **File organization**: In modules with platform-specific implementations, create `types.ts` to define shared types. Import and use shared types in each platform specific files.
 
   > Why? To encourage consistent API across platform-specific implementations.
 
@@ -393,7 +394,9 @@ type Foo = {
     export default function MyComponent({ foo }: MyComponentProps) {...}
   ```
 
-- [1.16] **Reusable Types**: Reusable type definitions, such as models (e.g. Report), must have their own file and be placed under `src/types/`. The type should be exported as a default export.
+<a name="reusable-types"></a><a name="1.16"></a>
+
+- [1.16](#reusable-types) **Reusable Types**: Reusable type definitions, such as models (e.g. Report), must have their own file and be placed under `src/types/`. The type should be exported as a default export.
 
 ```ts
 // src/types/Report.ts
