@@ -67,7 +67,7 @@ type Foo = {
 
 <a name="convension-naming-convension"></a><a name="1.1"></a>
 
-- [1.1](#convension-naming-convension) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`
+- [1.1](#convension-naming-convension) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`. eslint: [`@typescript-eslint/naming-convention`](https://typescript-eslint.io/rules/naming-convention/)
 
   ```ts
   // bad
@@ -91,7 +91,7 @@ type Foo = {
 
 <a name="convensions-type-alias-vs-interface"></a><a name="1.3"></a>
 
-- [1.3](#convensions-type-alias-vs-interface) **Type Alias vs. Interface**: Do not use `interface`. Use `type`.
+- [1.3](#convensions-type-alias-vs-interface) **Type Alias vs. Interface**: Do not use `interface`. Use `type`. eslint: [`@typescript-eslint/consistent-type-definitions`](https://typescript-eslint.io/rules/consistent-type-definitions/)
 
   > Why? In TypeScript, `type` and `interface` can be used interchangeably to declare types. Use `type` for consistency.
 
@@ -109,7 +109,7 @@ type Foo = {
 
 <a name="convensions-enum-vs-union-type"></a><a name="1.4"></a>
 
-- [1.4](#convensions-enum-vs-union-type) **Enum vs. Union Type**: Do not use `enum`. Use union types.
+- [1.4](#convensions-enum-vs-union-type) **Enum vs. Union Type**: Do not use `enum`. Use union types. eslint: [`no-restricted-syntax`](https://eslint.org/docs/latest/rules/no-restricted-syntax)
 
   > Why? Enums come with several [pitfalls](https://blog.logrocket.com/why-typescript-enums-suck/). Most enum use cases can be replaced with union types.
 
@@ -145,7 +145,7 @@ type Foo = {
 
 <a name="convensions-unknown-vs-any"></a><a name="1.5"></a>
 
-- [1.5](#convensions-unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand.
+- [1.5](#convensions-unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand. eslint: [`@typescript-eslint/no-explicit-any'`](https://typescript-eslint.io/rules/no-explicit-any/)
 
   > Why? `any` type bypasses type checking. `unknown` is type safe as `unknown` type needs to be type narrowed before being used.
 
@@ -158,7 +158,7 @@ type Foo = {
 
 <a name="convensions-array"></a><a name="1.6"></a>
 
-- [1.6](#convensions-array) **`T[]` vs. `Array<T>`**: Use `T[]` or `readonly T[]` for simple types (i.e. types which are just primitive names or type references). Use `Array<T>` or `ReadonlyArray<T>` for all other types (union types, intersection types, object types, function types, etc).
+- [1.6](#convensions-array) **`T[]` vs. `Array<T>`**: Use `T[]` or `readonly T[]` for simple types (i.e. types which are just primitive names or type references). Use `Array<T>` or `ReadonlyArray<T>` for all other types (union types, intersection types, object types, function types, etc). eslint: [`@typescript-eslint/array-type`](https://typescript-eslint.io/rules/array-type/)
 
   ```ts
   // Array<T>
@@ -174,11 +174,11 @@ type Foo = {
 
 <a name="convension-ts-ignore"></a><a name="1.7"></a>
 
-- [1.7](#convension-ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` during the migration for type errors that should be handled later.
+- [1.7](#convension-ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` during the migration for type errors that should be handled later. eslint: [`@typescript-eslint/ban-ts-comment`](https://typescript-eslint.io/rules/ban-ts-comment/)
 
 <a name="convension-ts-nullish-coalescing"></a><a name="1.8"></a>
 
-- [1.8](#convension-ts-nullish-coalescing) **Optional chaining and nullish coalescing**: Use optional chaining and nullish coalescing instead of the `get` lodash function.
+- [1.8](#convension-ts-nullish-coalescing) **Optional chaining and nullish coalescing**: Use optional chaining and nullish coalescing instead of the `get` lodash function. eslint: [`no-restricted-imports`](https://eslint.org/docs/latest/rules/no-restricted-imports)
 
   ```ts
   // Bad
@@ -221,7 +221,7 @@ type Foo = {
 
 <a name="conventions-jsdoc"></a><a name="1.10"></a>
 
-- [1.10](#conventions-jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`
+- [1.10](#conventions-jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`. eslint: [`jsdoc/no-types`](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/.README/rules/no-types.md)
 
   ```ts
   // bad
@@ -282,7 +282,7 @@ type Foo = {
 
 <a name="convension-object-type"></a><a name="1.13"></a>
 
-- [1.13](#convension-object-type) **`object`**: Don't use `object` type.
+- [1.13](#convension-object-type) **`object`**: Don't use `object` type. eslint: [`@typescript-eslint/ban-types`](https://typescript-eslint.io/rules/ban-types/)
 
   > Why? `object` refers to "any non-primitive type," not "any object". Typing "any non-primitive value" is not commonly needed.
 
