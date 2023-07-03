@@ -7,7 +7,7 @@
 - [Exception to Rules](#exception-to-rules)
 - [General Rules](#general-rules)
 - [Guidelines](#guidelines)
-  - [1.1 Naming Conventions](#naming-convension)
+  - [1.1 Naming Conventions](#naming-conventions)
   - [1.2 `d.ts` Extension](#d-ts-extension)
   - [1.3 Type Alias vs. Interface](#type-alias-vs-interface)
   - [1.4 Enum vs. Union Type](#enum-vs-union-type)
@@ -22,9 +22,9 @@
   - [1.13 `object` Type](#object-type)
   - [1.14 Export Prop Types](#export-prop-types)
   - [1.15 File Organization](#file-organization)
-  - [1.26 Reusable Types](#reusable-types)
+  - [1.16 Reusable Types](#reusable-types)
 - [Communication Items](#items)
-- [Migration Guidelines](#guidelines)
+- [Migration Guidelines](#migration-guidelines)
 
 ## Other Expensify Resources on TypeScript
 
@@ -66,20 +66,22 @@ type Foo = {
 
 ## Guidelines
 
-<a name="naming-convension"></a><a name="1.1"></a>
+<a name="naming-conventions"></a><a name="1.1"></a>
 
-- [1.1](#naming-convension) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`. eslint: [`@typescript-eslint/naming-convention`](https://typescript-eslint.io/rules/naming-convention/)
+- [1.1](#naming-conventions) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`. Use singular name for union types. eslint: [`@typescript-eslint/naming-convention`](https://typescript-eslint.io/rules/naming-convention/)
 
   ```ts
   // bad
   type foo = ...;
   type BAR = ...;
   type PersonType = ...;
+  type Colors = 'red' | 'blue' | 'green';
 
   // good
   type Foo = ...;
   type Bar = ...;
   type Person = ...;
+  type Color = 'red' | 'blue' | 'green';
   ```
 
 <a name="d-ts-extension"></a><a name="1.2"></a>
@@ -146,7 +148,7 @@ type Foo = {
 
 <a name="unknown-vs-any"></a><a name="1.5"></a>
 
-- [1.5](#unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand. eslint: [`@typescript-eslint/no-explicit-any'`](https://typescript-eslint.io/rules/no-explicit-any/)
+- [1.5](#unknown-vs-any) **`unknown` vs. `any`**: Don't use `any`. Use `unknown` if type is not known beforehand. eslint: [`@typescript-eslint/no-explicit-any`](https://typescript-eslint.io/rules/no-explicit-any/)
 
   > Why? `any` type bypasses type checking. `unknown` is type safe as `unknown` type needs to be type narrowed before being used.
 
@@ -175,7 +177,9 @@ type Foo = {
 
 <a name="ts-ignore"></a><a name="1.7"></a>
 
-- [1.7](#ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors. Use `@ts-expect-error` during the migration for type errors that should be handled later. eslint: [`@typescript-eslint/ban-ts-comment`](https://typescript-eslint.io/rules/ban-ts-comment/)
+- [1.7](#ts-ignore) **@ts-ignore**: Do not use `@ts-ignore` or its variant `@ts-nocheck` to suppress warnings and errors.
+
+  > Use `@ts-expect-error` during the migration for type errors that should be handled later. Refer to the [Migration Guidelines](#migration-guidelines) for specific instructions on how to deal with type errors during the migration. eslint: [`@typescript-eslint/ban-ts-comment`](https://typescript-eslint.io/rules/ban-ts-comment/)
 
 <a name="ts-nullish-coalescing"></a><a name="1.8"></a>
 
@@ -183,7 +187,7 @@ type Foo = {
 
   ```ts
   // Bad
-  import { get } from "lodash";
+  import lodashGet from "lodash/get";
   const name = lodashGet(user, "name", "default name");
 
   // Good
@@ -294,7 +298,7 @@ type Foo = {
 
   If you know that the type of data is an object but don't know what properties or values it has beforehand, use `Record<string, unknown>`.
 
-  > Even though `string` is specified as a key, `Record<string, unknown>` type can still accepts objects whose keys are numbers or symbols. This is because number and
+  > Even though `string` is specified as a key, `Record<string, unknown>` type can still accepts objects whose keys are numbers. This is because numbers are converted to strings when used as an object index. Note that you cannot use [symbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) for `Record<string, unknown>`.
 
   ```ts
   function logObject(object: Record<string, unknown>) {
@@ -429,18 +433,19 @@ declare module "external-library-name" {
 
 - If you're migrating a module that doesn't have a default implementation (i.e. `index.ts`, e.g. `getPlatform`), convert `index.website.js` to `index.ts`. Without `index.ts`, TypeScript cannot get type information where the module is imported.
 
+- Deprecate the usage of `underscore`. Use corresponding methods from `lodash`. eslint: [`no-restricted-imports`](https://eslint.org/docs/latest/rules/no-restricted-imports)
+
 - Found type bugs. Now what?
 
   If TypeScript migration uncovers a bug that has been “invisible,” there are two options an author of a migration PR can take
 
   - Fix issues if they are minor. Document each fix in the PR comment
-  - Suppress a TypeScript error stemming from the bug with `@ts-expect-error`. Create a separate GH issue. Prefix the issue title with `[TS ERROR #<issue-number-of-migration-PR>]`. Cross-link the migration PR and the created GH issue. On the line below `@ts-expect-error`, put down the GH issue number prefixed with `TODO:`.
+  - Suppress a TypeScript error stemming from the bug with `@ts-expect-error`. Create a separate GH issue. Prefix the issue title with `[TS ERROR #<issue-number-of-migration-PR>]`. Cross-link the migration PR and the created GH issue. On the same line as `@ts-expect-error`, put down the GH issue number prefixed with `TODO:`.
 
-  The `@ts-expect-error` annotation tells the TS compiler to ignore any errors in the line that follows it. However, if there's no error in the line, TypeScript will also raise an error.
+  > The `@ts-expect-error` annotation tells the TS compiler to ignore any errors in the line that follows it. However, if there's no error in the line, TypeScript will also raise an error.
 
   ```ts
-  // @ts-expect-error
-  // TODO: #21647
+  // @ts-expect-error TODO: #21647
   const x: number = "123"; // No TS error raised
 
   // @ts-expect-error
