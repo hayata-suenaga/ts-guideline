@@ -346,9 +346,9 @@ type Foo = {
 
 <a name="export-prop-types"></a><a name="1.14"></a>
 
-- [1.14](#export-prop-types) **Prop Types**: Define and export prop types for components. Use exported prop types instead of grabbing the prop type from a component.
+- [1.14](#export-prop-types) **Prop Types**: Don't use `ComponentProps` to grab a component's prop types. Go to the source file for the component and export prop types from there. Import and use the exported prop types.
 
-  > Why? Exporting prop types aids reusability.
+  > Don't export prop types from component files by default. Only export it when there is a code that needs to access the prop type directly.
 
   ```tsx
   // MyComponent.tsx
