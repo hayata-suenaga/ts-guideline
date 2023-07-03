@@ -103,7 +103,7 @@ type Foo = {
     type Color = "red" | "blue" | "green";
     ```
 
-  - For generic type parameters, use `T` if you have only one type parameter. Don't use the `T`, `U`, `V`... sequence. Make each type parameter name descriptive, each prefixed with `T`.
+  - For generic type parameters, use `T` if you have only one type parameter. Don't use the `T`, `U`, `V`... sequence. Make type parameter names descriptive, each prefixed with `T`.
 
     > Prefix each type parameter name to distinguish them from other types.
 
