@@ -69,21 +69,56 @@ type Foo = {
 
 <a name="naming-conventions"></a><a name="1.1"></a>
 
-- [1.1](#naming-conventions) **Naming Conventions**: Use PascalCase for type names. Do not postfix type aliases with `Type`. Use singular name for union types. eslint: [`@typescript-eslint/naming-convention`](https://typescript-eslint.io/rules/naming-convention/)
+- [1.1](#naming-conventions) **Naming Conventions**: Follow naming conventions specified below
 
-  ```ts
-  // bad
-  type foo = ...;
-  type BAR = ...;
-  type PersonType = ...;
-  type Colors = 'red' | 'blue' | 'green';
+  - Use PascalCase for type names. eslint: [`@typescript-eslint/naming-convention`](https://typescript-eslint.io/rules/naming-convention/)
 
-  // good
-  type Foo = ...;
-  type Bar = ...;
-  type Person = ...;
-  type Color = 'red' | 'blue' | 'green';
-  ```
+    ```ts
+    // bad
+    type foo = ...;
+    type BAR = ...;
+
+    // good
+    type Foo = ...;
+    type Bar = ...;
+    ```
+
+  - Do not postfix type aliases with `Type`.
+
+    ```ts
+    // bad
+      type PersonType = ...;
+
+    // good
+    type Person = ...;
+    ```
+
+  - Use singular name for union types.
+
+    ```ts
+    // bad
+    type Colors = "red" | "blue" | "green";
+
+    // good
+    type Color = "red" | "blue" | "green";
+    ```
+
+  - For generic type parameters, use `T` if you have only one type parameter. Don't use the `T`, `U`, `V`... sequence. Make each type parameter name descriptive, each prefixed with `T`.
+
+    > Prefix each type parameter name to distinguish them from other types.
+
+    ```ts
+    // bad
+    type KeyValuePair<T, U> = { key: K; value: U };
+
+    type Keys<Key> = Array<Key>;
+
+    // good
+    type KeyValuePair<TKey, TValue> = { key: TKey; value: TValue };
+
+    type Keys<T> = Array<T>;
+    type Keys<TKey> = Array<TKey>;
+    ```
 
 <a name="d-ts-extension"></a><a name="1.2"></a>
 
