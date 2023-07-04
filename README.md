@@ -24,6 +24,7 @@
   - [1.15 File Organization](#file-organization)
   - [1.16 Reusable Types](#reusable-types)
   - [1.17 `.tsx`](#tsx)
+  - [1.18 No inline prop types](#no-inline-prop-types)
 - [Communication Items](#items)
 - [Migration Guidelines](#migration-guidelines)
 
@@ -438,19 +439,38 @@ type Foo = {
 
 - [1.16](#reusable-types) **Reusable Types**: Reusable type definitions, such as models (e.g. Report), must have their own file and be placed under `src/types/`. The type should be exported as a default export.
 
-```ts
-// src/types/Report.ts
+  ```ts
+  // src/types/Report.ts
 
-type Report = {...};
+  type Report = {...};
 
-export default Report;
-```
+  export default Report;
+  ```
 
-<a name="tsx"></a><a name="1.17"></a>
+  <a name="tsx"></a><a name="1.17"></a>
 
-- [1.17](#tsx) **tsx** Use `.tsx` extension for files that contain React syntax.
+- [1.17](#tsx) **tsx**: Use `.tsx` extension for files that contain React syntax.
 
-> Why? It is a widely adopted convention to mark any files that contain React specific syntax with `.jsx` or `.tsx`.
+  > Why? It is a widely adopted convention to mark any files that contain React specific syntax with `.jsx` or `.tsx`.
+
+  <a name="no-inline-prop-types"></a><a name="1.18"></a>
+
+- [1.18](#no-inline-prop-types) **No inline prop tpe**: Do not define prop types inline for components that are exported.
+
+  > Why? Prop types might need to be exported from component files. //TODO: link to the export component types section. If the component is only used inside a file or module and not exported, then inline prop types can be used.
+
+  ```ts
+  // bad
+  export default function MyComponent({ foo, bar }: { foo: string, bar: number }){
+    // component implementation
+  };
+
+  // good
+  type MyComponentProp = { foo: string, bar: number };
+  export default MyComponent({ foo, bar }: MyComponentProp){
+    // component implementation
+  }
+  ```
 
 ## Communication Items
 
