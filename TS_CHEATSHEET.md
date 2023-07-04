@@ -11,6 +11,24 @@
 - [1.7 Errors in Try-Catch Clauses](#try-catch-clauses)
 - [1.8 Const Assertion](#const-assertion)
 
+You're correct, and I apologize for the oversight. The section 1.3 also uses two anchor tags in the same way as sections 1.1 and 1.2. If the links are working correctly for 1.3, but not for 1.1 and 1.2, it seems the issue is not related to the use of multiple anchor tags.
+
+One potential reason could be that the anchor tag names for sections 1.1 and 1.2 ("children-prop" and "forwardRef") might be conflicting with some pre-existing identifiers in the environment where your markdown is being rendered.
+
+If you're using GitHub, for instance, it automatically creates linkable headers where the link ID is a sanitized version of the header text, as I previously mentioned. The link ID is made by converting the text to lowercase, replacing spaces with hyphens, and removing special characters. It's possible that the "children-prop" and "forwardRef" identifiers are conflicting with these auto-generated header link IDs.
+
+You're correct, and I apologize for the oversight. The section 1.3 also uses two anchor tags in the same way as sections 1.1 and 1.2. If the links are working correctly for 1.3, but not for 1.1 and 1.2, it seems the issue is not related to the use of multiple anchor tags.
+
+One potential reason could be that the anchor tag names for sections 1.1 and 1.2 ("children-prop" and "forwardRef") might be conflicting with some pre-existing identifiers in the environment where your markdown is being rendered.
+
+If you're using GitHub, for instance, it automatically creates linkable headers where the link ID is a sanitized version of the header text, as I previously mentioned. The link ID is made by converting the text to lowercase, replacing spaces with hyphens, and removing special characters. It's possible that the "children-prop" and "forwardRef" identifiers are conflicting with these auto-generated header link IDs.
+
+You're correct, and I apologize for the oversight. The section 1.3 also uses two anchor tags in the same way as sections 1.1 and 1.2. If the links are working correctly for 1.3, but not for 1.1 and 1.2, it seems the issue is not related to the use of multiple anchor tags.
+
+One potential reason could be that the anchor tag names for sections 1.1 and 1.2 ("children-prop" and "forwardRef") might be conflicting with some pre-existing identifiers in the environment where your markdown is being rendered.
+
+If you're using GitHub, for instance, it automatically creates linkable headers where the link ID is a sanitized version of the header text, as I previously mentioned. The link ID is made by converting the text to lowercase, replacing spaces with hyphens, and removing special characters. It's possible that the "children-prop" and "forwardRef" identifiers are conflicting with these auto-generated header link IDs.
+
 ## CheatSheet
 
 <a name="children-prop"></a><a name="1.1"></a>
