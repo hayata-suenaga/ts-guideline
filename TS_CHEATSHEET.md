@@ -2,8 +2,8 @@
 
 ## Table of Contents
 
-- [1.1 props.children](#children-prop)
-- [1.2 forwardRef](#forwardRef)
+- [1.1 Typing `props.children`](#children-prop)
+- [1.2 Typing `forwardRef`](#forwardRef)
 - [1.3 Animated styles](#animated-style)
 - [1.4 Style Props](#style-props)
 - [1.5 Render Prop](#render-prop)
