@@ -5,8 +5,8 @@
 - [CheatSheet](#cheatsheet)
   - [1.1 `props.children`](#children-prop)
   - [1.2 `forwardRef`](#forwardRef)
-  - [1.3 Animated styles](#animated-style)
-  - [1.4 Style Props](#style-props)
+  - [1.3 Style Props](#style-props)
+  - [1.4 Animated styles](#animated-style)
   - [1.5 Render Prop](#render-prop)
   - [1.6 Type Narrowing](#type-narrowing)
   - [1.7 Errors in Try-Catch Clauses](#try-catch-clauses)
@@ -67,31 +67,9 @@
   }
   ```
 
-<a name="animated-style"></a><a name="1.3"></a>
+<a name="style-props"></a><a name="1.3"></a>
 
-- [1.3](#animated-style) **Animated styles**
-
-  ```ts
-  import {useRef} from 'react';
-  import {Animated, StyleProp, ViewStyle} from 'react-native';
-
-  type MyComponentProps = {
-      style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  };
-
-  function MyComponent({ style }: MyComponentProps) {
-      return <Animated.View style={style} />;
-  }
-
-  function MyComponent() {
-      const anim = useRef(new Animated.Value(0)).current;
-      return <Component style={{opacity: anim.interpolate({...})}} />;
-  }
-  ```
-
-<a name="style-props"></a><a name="1.4"></a>
-
-- [1.4](#style-props) **Style Props**
+- [1.3](#style-props) **Style Props**
 
   Use `StyleProp<T>` to type style props. For pass-through style props, use types exported from `react-native` for the type parameter (e.g. `ViewStyle`).
 
@@ -109,6 +87,28 @@
         <Text style={textStyle}>Sample Image</Text>
         <Image style={imageStyle} src={'https://sample.com/image.png'} />
     </View>
+  }
+  ```
+
+<a name="animated-style"></a><a name="1.4"></a>
+
+- [1.4](#animated-style) **Animated styles**
+
+  ```ts
+  import {useRef} from 'react';
+  import {Animated, StyleProp, ViewStyle} from 'react-native';
+
+  type MyComponentProps = {
+      style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  };
+
+  function MyComponent({ style }: MyComponentProps) {
+      return <Animated.View style={style} />;
+  }
+
+  function MyComponent() {
+      const anim = useRef(new Animated.Value(0)).current;
+      return <Component style={{opacity: anim.interpolate({...})}} />;
   }
   ```
 
