@@ -11,6 +11,7 @@
   - [1.6 Type Narrowing](#type-narrowing)
   - [1.7 Errors in Try-Catch Clauses](#try-catch-clauses)
   - [1.8 Const Assertion](#const-assertion)
+  - [1.9 Higher Order Components](#higher-order-components)
 
 ## CheatSheet
 
@@ -139,7 +140,7 @@
 
 <a name="type-narrowing"></a><a name="1.6"></a>
 
-- [1.6](#type-narrowing) **Type Narrowing** Narrow types down using `typeof` or custom type guards.
+- [1.6](#type-narrowing) **Type Narrowing** Narrow types down using `typeof`, discriminated unions, or custom type guards. Refer [this guide](https://medium.com/@hayata.suenaga/discriminated-unions-custom-type-guards-182ebe1f92fb) for more information on when to use discriminated unions and custom type guards.
 
   ```ts
   type Manager = {
@@ -214,3 +215,21 @@
   const array1 = ["hello", 1]; // type: (string | number)[]
   const array2 = ["goodbye", 2]; // type: readonly ["goodbye", 2]
   ```
+
+<a name="higher-order-component"></a><a name="1.9"></a>
+
+- [1.9](#higher-order-component) **Higher Order Component**
+
+  Typing HOCs is hard. Refer to [this articles](https://medium.com/@hayata.suenaga/ts-higher-order-components-30c38dd19ae8) for detailed guideline on typing HOCs for different usages of HOCs.
+
+<a name="function-overloading"></a><a name="1.9"></a>
+
+- [1.10](#function-overloading) **Function Overloading**
+
+  Use [function overloads](https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads) to provide more type information for functions. For the following types of functions, function overloading can be beneficial.
+
+  - The return type depends on the input type
+  - When function accept different number of parameters
+  - There are type dependencies between parameters
+
+  Refer to [this guide](https://medium.com/@hayata.suenaga/when-to-use-function-overloads-acc48f7e3142) to learn how to use functional overloads for each situation.
