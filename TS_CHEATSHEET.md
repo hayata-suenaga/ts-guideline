@@ -12,6 +12,7 @@
   - [1.7 Errors in Try-Catch Clauses](#try-catch-clauses)
   - [1.8 Const Assertion](#const-assertion)
   - [1.9 Higher Order Components](#higher-order-components)
+  - [1.10 Function Overloading](#function-overloading)
 
 ## CheatSheet
 
@@ -222,7 +223,7 @@
 
   Typing HOCs is hard. Refer to [this articles](https://medium.com/@hayata.suenaga/ts-higher-order-components-30c38dd19ae8) for detailed guideline on typing HOCs for different usages of HOCs.
 
-<a name="function-overloading"></a><a name="1.9"></a>
+<a name="function-overloading"></a><a name="1.10"></a>
 
 - [1.10](#function-overloading) **Function Overloading**
 
