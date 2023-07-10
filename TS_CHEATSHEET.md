@@ -24,7 +24,7 @@
     children?: React.ReactNode;
   };
 
-  function WrapperComponent({ children }: Props) {
+  function WrapperComponent({ children }: WrapperComponentProps) {
     return <View>{children}</View>;
   }
 
@@ -45,12 +45,12 @@
   import { forwardRef, useRef, ReactNode } from "react";
   import { TextInput, View } from "react-native";
 
-  export type CustomButtonProps = {
+  export type CustomTextInputProps = {
     label: string;
     children?: ReactNode;
   };
 
-  const CustomTextInput = forwardRef<TextInput, CustomButtonProps>(
+  const CustomTextInput = forwardRef<TextInput, CustomTextInputProps>(
     (props, ref) => {
       return (
         <View>
@@ -62,7 +62,7 @@
   );
 
   function ParentComponent() {
-    const ref = useRef<TextInput>;
+    const ref = useRef<TextInput>();
     return <CustomTextInput ref={ref} label="Press me" />;
   }
   ```
@@ -79,7 +79,7 @@
       style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   };
 
-  function MyComponent({ style }: Props) {
+  function MyComponent({ style }: MyComponentProps) {
       return <Animated.View style={style} />;
   }
 
@@ -104,7 +104,7 @@
     imageStyle?: StyleProp<ImageStyle>;
   };
 
-  function MyComponentProps({ containerStyle, textStyle, imageStyle }: MyComponentProps) = {
+  function MyComponent({ containerStyle, textStyle, imageStyle }: MyComponentProps) = {
     <View style={containerStyle}>
         <Text style={textStyle}>Sample Image</Text>
         <Image style={imageStyle} src={'https://sample.com/image.png'} />
