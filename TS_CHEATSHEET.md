@@ -216,9 +216,9 @@
   const array2 = ["goodbye", 2]; // type: readonly ["goodbye", 2]
   ```
 
-<a name="higher-order-component"></a><a name="1.9"></a>
+<a name="higher-order-components"></a><a name="1.9"></a>
 
-- [1.9](#higher-order-component) **Higher Order Component**
+- [1.9](#higher-order-components) **Higher Order Components**
 
   Typing HOCs is hard. Refer to [this articles](https://medium.com/@hayata.suenaga/ts-higher-order-components-30c38dd19ae8) for detailed guideline on typing HOCs for different usages of HOCs.
 
