@@ -144,7 +144,7 @@ type Foo = {
   const COLORS = ["red", "green", "blue"] as const;
   type Color = TupleToUnion<typeof COLORS>; // type: 'red' | 'green' | 'blue'
 
-  for (const colors of color) {
+  for (const color of COLORS) {
     printColor(color);
   }
 
@@ -404,13 +404,13 @@ type Foo = {
     import { MyComponentProps } from "./types";
 
     export MyComponentProps;
-    export default function MyComponent({ foo }: MyComponentProps) {...}
+    export default function MyComponent({ foo }: MyComponentProps) { /* ios specific implementation */ }
 
     // index.ts
     import { MyComponentProps } from "./types";
 
     export MyComponentProps;
-    export default function MyComponent({ foo }: MyComponentProps) {...}
+    export default function MyComponent({ foo }: MyComponentProps) { /* Default implementation */ }
   ```
 
 <a name="reusable-types"></a><a name="1.16"></a>
