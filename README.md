@@ -241,7 +241,7 @@ type Foo = {
 
 <a name="jsdoc"></a><a name="1.10"></a>
 
-- [1.10](#jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`. eslint: [`jsdoc/no-types`](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/.README/rules/no-types.md)
+- [1.10](#jsdoc) **JSDoc**: Omit comments that are redundant with TypeScript. Do not declare types in `@param` or `@return` blocks. Do not write `@implements`, `@enum`, `@private`, `@override`. I the parameter or return value annotations don't contain any explanation, omit them. If the eslint: [`jsdoc/no-types`](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/.README/rules/no-types.md)
 
   ```ts
   // BAD
@@ -255,16 +255,22 @@ type Foo = {
 
   // GOOD
   /**
-   * @param age
    * @returns Whether the person is a legal drinking age or nots
    */
+  function canDrink(age: number): boolean {
+    return age >= 21;
+  }
   ```
+
+  In the above example, because `age` parameter doesn't need explanation, you can omit it from JSDoc
 
 <a name="proptypes-and-defaultprops"></a><a name="1.11"></a>
 
 - [1.11](#proptypes-and-defaultprops) **`propTypes` and `defaultProps`**: Do not use them. Use object destructing to assign default values if necessary.
 
   > Refer to [the propTypes Migration Table](./PROPTYPES_CONVERSION_TABLE.md) on how to type props based on existing `propTypes`.
+
+  > Assign a default value to each optional prop unless default values should be `undefined` or `null`.
 
   ```tsx
   type MyComponentProps = {
